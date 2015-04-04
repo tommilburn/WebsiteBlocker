@@ -11,12 +11,33 @@
 			font-size: 1em;
 			font-weight: bold;
 		}
+		textarea{
+			width: 100%;
+			resize: none;
+		}
+		button, form{
+			width:70%;
+			margin: .5em 15%;
+		}
+
 	</style>	
 </head>
 <body>
 	<div id="content">
 		<h1>Website Blocker</h1>
-
+		<textarea id="sites" name="sites" rows="10"></textarea>
+		<button id="save" name="save">Save Blocklist</button>
+		<form>
+		<input type="radio" name="enabled" value="on" checked>Enabled
+			<input type="radio" name="enabled" value="off">Disabled
+		</form> 
 	</div>
+	<script type="text/javascript">
+		function buildBlocklist(){
+			var list = document.getElementById('sites').value;
+			safari.extension.globalPage.contentWindow.buildBlocklist(list);
+		}
+		document.getElementById("save").onclick = buildBlocklist;
+	</script>
 </body>
 </html>
