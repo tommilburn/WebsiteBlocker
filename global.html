@@ -1,16 +1,34 @@
 <script type="text/javascript">
 
-var blockList;
+	var blockList;
+	var blockingEnabled = true;
 
-console.log('loaded');
+	safari.application.addEventListener("navigate", handleNavigate, true);
 
+	function handleNavigate(event){
+		var url = event.target.url;
+		console.log(event);
+		blockList.forEach(function(listEntry){
+			if(shouldBlock(event.target.url){
+				event.preventDefault();
+				console.log(event);
+			});
+		});
+	}
 
-safari.application.addEventListener("beforeNavigate", handleBeforeNavigate, true);
+	function shouldBlock(url){
+		blockList.forEach(function(listEntry){
+			if((url.indexOf(listEntry) != -1) && (url.indexOf(listEntry) <= 12)){ // 'https://www.' is twelve characters
+				if(blockingEnabled){
+					console.log("this site is gonna get blocked");
+					return true;
+				}
+			}
+		});
+		return false;
+	}
 
-function handleBeforeNavigate(event){
-	console.log(event.url);
-}
-function buildBlocklist(listString){
-	blockList = listString.split('\n');
-}
+	function buildBlocklist(listString){
+		blockList = listString.split('\n').trim();
+	}
 </script>

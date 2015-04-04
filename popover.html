@@ -22,10 +22,11 @@
 
 	</style>	
 </head>
-<body>
+<body onload="buildBlocklist()">
 	<div id="content">
 		<h1>Website Blocker</h1>
-		<textarea id="sites" name="sites" rows="10"></textarea>
+		<textarea id="sites" name="sites" rows="10">google.com
+reddit.com</textarea>
 		<button id="save" name="save">Save Blocklist</button>
 		<form>
 		<input type="radio" name="enabled" value="on" checked>Enabled
