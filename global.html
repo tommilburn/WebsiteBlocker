@@ -1,0 +1,8 @@
+<script type="text/javascript">
+console.log('loaded');
+safari.application.addEventListener("beforeNavigate", handleBeforeNavigate, true);
+
+function handleBeforeNavigate(event){
+	console.log(event.url);
+}
+</script>
