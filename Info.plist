@@ -54,7 +54,12 @@
 	<key>Content</key>
 	<dict>
 		<key>Scripts</key>
-		<dict/>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>inject.js</string>
+			</array>
+		</dict>
 	</dict>
 	<key>Description</key>
 	<string>Blocks websites. Nothing fancy.</string>

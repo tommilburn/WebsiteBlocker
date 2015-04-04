@@ -1,30 +1,30 @@
 <script type="text/javascript">
 
-	var blockList;
+	var blockList = ['reddit.com', 'google.com'];
 	var blockingEnabled = true;
 
 	safari.application.addEventListener("navigate", handleNavigate, true);
 
 	function handleNavigate(event){
-		var url = event.target.url;
-		console.log(event);
-		blockList.forEach(function(listEntry){
-			if(shouldBlock(event.target.url){
-				event.preventDefault();
-				console.log(event);
-			});
-		});
+		console.log('is it gonna get blocked?');
+		console.log(shouldBlock(event.target.url));
+		if(shouldBlock(event.target.url) === true){
+			console.log('blocking')
+			event.target.page.dispatchMessage('block', 'page');
+			console.log(event.target.page);
+			console.log(event.target.page.dispatchMessage);
+		};
 	}
 
 	function shouldBlock(url){
-		blockList.forEach(function(listEntry){
-			if((url.indexOf(listEntry) != -1) && (url.indexOf(listEntry) <= 12)){ // 'https://www.' is twelve characters
+		for(var i = 0; i < blockList.length; i++){
+			if((url.indexOf(blockList[i]) != -1) && (url.indexOf(blockList[i]) <= 12)){
 				if(blockingEnabled){
 					console.log("this site is gonna get blocked");
 					return true;
 				}
 			}
-		});
+		}
 		return false;
 	}
 
