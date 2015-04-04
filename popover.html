@@ -22,23 +22,33 @@
 
 	</style>	
 </head>
-<body onload="buildBlocklist()">
+<body>
 	<div id="content">
 		<h1>Website Blocker</h1>
 		<textarea id="sites" name="sites" rows="10">google.com
 reddit.com</textarea>
 		<button id="save" name="save">Save Blocklist</button>
 		<form>
-		<input type="radio" name="enabled" value="on" checked>Enabled
-			<input type="radio" name="enabled" value="off">Disabled
+		<input type="radio" id="enabled" name="enabled" value="enabled" checked>Enabled
+			<input type="radio" id="disabled" name="enabled" value="disabled">Disabled
 		</form> 
 	</div>
 	<script type="text/javascript">
-		function buildBlocklist(){
-			var list = document.getElementById('sites').value;
-			safari.extension.globalPage.contentWindow.buildBlocklist(list);
+		document.getElementById('save').onclick = function(e){
+			var sites = document.getElementById('sites').value.split('\n');
+			sites.forEach(function(site, i){
+				site[i] = site[i].trim();
+			});
+			safari.extension.globalPage.contentWindow.blockList = sites;
 		}
-		document.getElementById("save").onclick = buildBlocklist;
+		document.getElementById("enabled").onclick = function(){
+			safari.extension.globalPage.contentWindow.blockingEnabled = true;
+		}
+		document.getElementById("disabled").onclick = function(){
+			safari.extension.globalPage.contentWindow.blockingEnabled = false;
+		}
+		
+		
 	</script>
 </body>
 </html>
