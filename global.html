@@ -1,18 +1,16 @@
 <script type="text/javascript">
 
-	var blockList = ['reddit.com', 'google.com'];
+	var blockList;
 	var blockingEnabled = false;
+	safari.extension.settings.addEventListener("change", siteHandler, false);
+
 
 	safari.application.addEventListener("navigate", handleNavigate, true);
 
 	function handleNavigate(event){
-		console.log('is it gonna get blocked?');
-		console.log(shouldBlock(event.target.url));
 		if(shouldBlock(event.target.url) === true){
-			console.log('blocking')
+			//blocked, sucka
 			event.target.page.dispatchMessage('block', 'page');
-			console.log(event.target.page);
-			console.log(event.target.page.dispatchMessage);
 		};
 	}
 
